@@ -1,4 +1,4 @@
-﻿namespace API.Utils
+﻿namespace FILEAPI.Utils
 {
     public class ModelEnums
     {

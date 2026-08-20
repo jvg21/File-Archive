@@ -1,6 +1,6 @@
-﻿using API.Utils;
+﻿
 
-namespace LifeSafeAPI.Data.Models
+namespace FILEAPI.Data.Models
 {
     public class File
     {
@@ -20,7 +20,7 @@ namespace LifeSafeAPI.Data.Models
         public int? Book_Id { get; set; }
         public Book? Book { get; set; }
         public int? Author_Id { get; set; }
-        public AuthorGetDTO? Author { get; set; }
+        public Author? Author { get; set; }
 
 
 

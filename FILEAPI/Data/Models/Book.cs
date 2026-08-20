@@ -1,4 +1,4 @@
-﻿namespace LifeSafeAPI.Data.Models
+﻿namespace FILEAPI.Data.Models
 {
     public class Book
     {
@@ -10,7 +10,7 @@
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<AuthorGetDTO> Authors { get; set; } = new List<AuthorGetDTO>();
+        public ICollection<Author> Authors { get; set; } = new List<Author>();
         public ICollection<Url> URLS { get; set; } = new List<Url>();
 
     }

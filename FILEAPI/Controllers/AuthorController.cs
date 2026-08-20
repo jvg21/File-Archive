@@ -1,8 +1,8 @@
-using LifeSafeAPI.Services;
-using LifeSafeAPI.Services.Interfaces;
+
+using FILEAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LifeSafeAPI.Controllers
+namespace FILEAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]

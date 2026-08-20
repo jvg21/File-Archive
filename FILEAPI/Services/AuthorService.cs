@@ -1,10 +1,11 @@
 ﻿
 
-using LifeSafeAPI.Data.Models;
-using LifeSafeAPI.Repository.Interfaces;
-using LifeSafeAPI.Services.Interfaces;
+using FILEAPI.Data.DTOs.Author;
+using FILEAPI.Repository.Interfaces;
+using FILEAPI.Services.Interfaces;
+using Mapster;
 
-namespace LifeSafeAPI.Services
+namespace FILEAPI.Services
 {
     public class AuthorService:IAuthorService
     {
@@ -21,7 +22,9 @@ namespace LifeSafeAPI.Services
             {
                 var request = await _authorRepository.GetAll();
 
-                return request;
+                var response = request.Adapt<List<AuthorGetDTO>>();
+
+                return response;
             }
             catch (Exception ex) { 
                    throw new Exception(ex.Message, ex);

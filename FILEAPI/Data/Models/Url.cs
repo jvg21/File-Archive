@@ -1,4 +1,4 @@
-﻿namespace LifeSafeAPI.Data.Models
+﻿namespace FILEAPI.Data.Models
 {
     public class Url(string Text)
     {
@@ -10,7 +10,7 @@
         public int? Book_Id { get; set; }
         public Book? Book { get; set; }
         public int? Author_Id { get; set; }
-        public AuthorGetDTO? Author { get; set; }
+        public Author? Author { get; set; }
 
     }
 }
