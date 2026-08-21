@@ -17,12 +17,12 @@ namespace FILEAPI.Repository
         public async Task<List<Book>> GetAll()
         {
 
-            return await _context.Book.AsNoTracking().ToListAsync();
+            return await _context.Book.AsNoTracking().Include(b=>b.URLS).ToListAsync();
         }
 
         public async Task<Book?> GetById(int id)
         {
-            return await _context.Book.FirstOrDefaultAsync(a => a.Id == id);
+            return await _context.Book.Include(b => b.URLS).FirstOrDefaultAsync(a => a.Id == id);
         }
         public async Task<List<Book>> Get(Expression<Func<Book, bool>> predicate)
         {
