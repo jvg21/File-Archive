@@ -10,13 +10,15 @@ namespace FILEAPI.Middleware
     {
         private readonly RequestDelegate _next;
         private readonly IHostEnvironment _environment;
-        public ExceptionHandlerMiddleware(RequestDelegate next, IHostEnvironment environment)
+        private readonly ILogger<ExceptionHandlerMiddleware> _logger;
+        public ExceptionHandlerMiddleware(RequestDelegate next, IHostEnvironment environment, ILogger<ExceptionHandlerMiddleware> logger)
         {
             this._next = next; 
             this._environment = environment;
+            this._logger = logger;
         }
 
-        public async Task Task(HttpContext httpContext)
+        public async Task InvokeAsync(HttpContext httpContext)
         {
             try
             {
@@ -34,7 +36,8 @@ namespace FILEAPI.Middleware
         }
 
         public async Task HandleException(Exception ex, HttpContext httpContext,int statusCode) {
-            
+
+            _logger.LogError(ex, ex.Message);
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = statusCode;
 

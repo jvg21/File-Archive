@@ -1,34 +1,71 @@
 ﻿
 
-using FILEAPI.Data.DTOs.Author;
+using FILEAPI.Data.Models;
+using FILEAPI.Data.Request.Exceptions;
 using FILEAPI.Repository.Interfaces;
 using FILEAPI.Services.Interfaces;
 using Mapster;
+using System.Net;
 
 namespace FILEAPI.Services
 {
-    public class AuthorService:IAuthorService
+    public class AuthorService : IAuthorService
     {
         private readonly IAuthorRepository _authorRepository;
 
-        public AuthorService(IAuthorRepository authorRepository)
+        private readonly IBookService _bookService;
+
+        public AuthorService(IAuthorRepository authorRepository, IBookService bookService)
         {
             this._authorRepository = authorRepository;
+            this._bookService = bookService;
         }
 
         public async Task<List<AuthorGetDTO>> GetAll()
         {
-            try
-            {
-                var request = await _authorRepository.GetAll();
-
-                var response = request.Adapt<List<AuthorGetDTO>>();
-
-                return response;
-            }
-            catch (Exception ex) { 
-                   throw new Exception(ex.Message, ex);
-            }
+            var request = await _authorRepository.GetAll();
+            return request.Adapt<List<AuthorGetDTO>>();
         }
+
+        public async Task<AuthorGetDTO?> GetById(int id)
+        {
+
+            var request = await _authorRepository.GetById(id);
+            return request.Adapt<AuthorGetDTO>(); ;
+        }
+
+        public async Task<AuthorGetDTO> Insert(AuthorInsertDTO authorDto)
+        {
+            if (authorDto == null) throw new InvalidFormException();
+
+            var author = authorDto.Adapt<Author>();
+            var request = await _authorRepository.Insert(author);
+            var response = request.Adapt<AuthorGetDTO>();
+
+            return response;
+
+        }
+
+        public async Task<AuthorGetDTO> Update(AuthorUpdateDTO authorDto)
+        {
+            if (authorDto == null) throw new InvalidFormException();
+
+            Author? author = await _authorRepository.GetById(authorDto.Id);
+
+            if (author == null) throw new EntityNotFoundException();
+
+         
+            var request = await _authorRepository.Update(author);
+            return request.Adapt<AuthorGetDTO>();
+
+        }
+
+        public async Task Delete(int id)
+        {
+            Author? author = await _authorRepository.GetById(id);
+            if (author == null) throw new EntityNotFoundException();
+            await _authorRepository.Delete(author);
+        }
+
     }
 }

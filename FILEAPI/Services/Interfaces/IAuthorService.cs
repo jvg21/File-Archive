@@ -1,5 +1,4 @@
-﻿using FILEAPI.Data.DTOs.Author;
-using FILEAPI.Data.Models;
+﻿using FILEAPI.Data.Models;
 
 namespace FILEAPI.Services.Interfaces
 {
@@ -7,9 +6,9 @@ namespace FILEAPI.Services.Interfaces
     {
         Task<List<AuthorGetDTO>> GetAll();
         Task<AuthorGetDTO?> GetById(int id);
-        Task<bool> Exists(int id);
-        Task<Author> Insert(Author author);
-        Task Update();
-        Task Delete(Author author);
+        //Task<bool> Exists(int id);
+        Task<AuthorGetDTO> Insert(AuthorInsertDTO author);
+        Task<AuthorGetDTO> Update(AuthorUpdateDTO author);
+        Task Delete(int id);
     }
 }

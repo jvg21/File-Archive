@@ -1,11 +1,11 @@
 ﻿namespace FILEAPI.Data.Models
 {
-    public class Url(string Text)
+    public class Url
     {
         public int Id { get; set; }
         public string? Name { get; set; }
 
-        public string Text { get; set; } = Text;
+        public string Content { get; set; } = string.Empty;
 
         public int? Book_Id { get; set; }
         public Book? Book { get; set; }

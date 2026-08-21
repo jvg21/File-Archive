@@ -13,6 +13,12 @@ namespace FILEAPI.Data.Maps
             builder.HasKey(a => a.Id);
 
             builder.Property(a => a.Name).HasMaxLength(60).IsRequired();
+            builder.HasIndex(a => a.Name).IsUnique();
+
+
+            // N Author <--> N Book
+
+            builder.HasMany(a => a.Books).WithMany(b => b.Authors).UsingEntity(j => j.ToTable("Book_Author"));
 
         }
     }

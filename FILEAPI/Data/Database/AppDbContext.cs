@@ -10,10 +10,15 @@ namespace FILEAPI.Data.Database
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Author> Author { get; set; }
+        public DbSet<Book> Book { get; set; }
+
+        public DbSet<Url> Url { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AuthorMap());
+            modelBuilder.ApplyConfiguration(new BookMap());
+            modelBuilder.ApplyConfiguration(new UrlMap());
         }
     }
 }

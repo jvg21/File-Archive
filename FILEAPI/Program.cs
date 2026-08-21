@@ -5,36 +5,61 @@ using FILEAPI.Repository.Interfaces;
 using FILEAPI.Services;
 using FILEAPI.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+
+#region Swagger
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "FILE API",
+        Version = "v1",
+        Description = "API para gerenciamento de arquivos"
+    });
+});
+
+#endregion
 
 #region Database Connection
 
-builder.Services.AddDbContext<AppDbContext>((options) =>
-
-     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    )
 );
+
 #endregion
 
 #region Dependency Injection
 
-builder.Services.AddScoped<IAuthorRepository,AuthorRepository>();
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IBookService, BookService>();
 #endregion
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+#region Development
+
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "FILE API v1");
+    });
 }
+
+#endregion
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
