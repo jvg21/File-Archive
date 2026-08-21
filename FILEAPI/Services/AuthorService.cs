@@ -54,6 +54,8 @@ namespace FILEAPI.Services
 
             if (author == null) throw new EntityNotFoundException();
 
+            //Update values
+            if(authorDto.Name != null) author.Name = authorDto.Name;
          
             var request = await _authorRepository.Update(author);
             return request.Adapt<AuthorGetDTO>();
