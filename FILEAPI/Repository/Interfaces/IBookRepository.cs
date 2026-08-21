@@ -11,8 +11,8 @@ namespace FILEAPI.Repository.Interfaces
 
         Task<bool> Exists(Expression<Func<Book, bool>> predicate);
 
-        Task<BookGetDTO> Insert(Book book);
-        Task<BookGetDTO> Update(Book book);
+        Task<Book> Insert(Book book);
+        Task<Book> Update(Book book);
         Task Delete(Book book);
     }
 }

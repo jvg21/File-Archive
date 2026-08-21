@@ -41,10 +41,11 @@ namespace FILEAPI.Repository
             return book;
         }
 
-        public async Task Update(Book book)
+        public async Task<Book> Update(Book book)
         {
             _context.Book.Update(book);
             await _context.SaveChangesAsync();
+            return book;
         }
 
         public async Task Delete(Book book)
