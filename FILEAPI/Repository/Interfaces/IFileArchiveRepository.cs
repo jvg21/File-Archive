@@ -6,14 +6,13 @@ namespace FILEAPI.Repository.Interfaces
 {
     public interface IFileArchiveRepository
     {
-        Task<List<FileArchiveMap>> GetAll();
-        Task<Book?> GetById(int id);
-        Task<List<Book>> Get(Expression<Func<Book, bool>> predicate);
+        Task<List<FileArchive>> GetAll();
+        Task<FileArchive?> GetById(int id);
+        Task<List<FileArchive>> Get(Expression<Func<FileArchive, bool>> predicate);
 
-        Task<bool> Exists(Expression<Func<Book, bool>> predicate);
 
-        Task<Book> Insert(Book book);
-        Task<Book> Update(Book book);
-        Task Delete(Book book);
+        Task<FileArchive> Insert(FileArchive book);
+        Task<FileArchive> Update(FileArchive book);
+        Task Delete(FileArchive book);
     }
 }

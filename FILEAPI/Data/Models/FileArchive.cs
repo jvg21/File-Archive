@@ -28,10 +28,7 @@ namespace FILEAPI.Data.Models
         public long? StorageBytes { get; set; }
         public string Path { get; set; } = string.Empty;
         public int? Book_Id { get; set; }
-        public Book? Book { get; set; }
         public int? Author_Id { get; set; }
-        public Author? Author { get; set; }
-
 
     }
 

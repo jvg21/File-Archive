@@ -8,8 +8,8 @@ namespace FILEAPI.Services.Interfaces
         Task<List<UrlGetDTO>> GetAll();
         Task<UrlGetDTO?> GetById(int id);
         //Task<bool> Exists(int id);
-        Task<UrlGetDTO> Insert(UrlInsertDTO book);
-        Task<UrlGetDTO> Update(UrlUpdateDTO book);
+        Task<UrlGetDTO> Insert(UrlInsertDTO url);
+        Task<UrlGetDTO> Update(UrlUpdateDTO url);
         Task Delete(int id);
     }
 }

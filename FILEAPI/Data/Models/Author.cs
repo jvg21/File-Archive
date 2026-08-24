@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public ICollection<Book> Books { get; set; } = new List<Book>();
+        public ICollection<FileArchive>? Files { get; set; } = new List<FileArchive>();
         public ICollection<Url> URLS { get; set; } = new List<Url>();
     }
 
@@ -13,15 +14,17 @@
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        //public ICollection<Models.Book> Books { get; set; } = new List<Models.Book>();
+        public ICollection<Models.Book> Books { get; set; } = new List<Models.Book>();
         public ICollection<UrlGetDTO> URLS { get; set; } = new List<UrlGetDTO>();
+        public ICollection<FileArchive>? Files { get; set; } = new List<FileArchive>();
     }
 
     public class AuthorInsertDTO
     {
         public string Name { get; set; } = string.Empty;
-        public ICollection<BookInsertDTO>? Books { get; set; } = new List<BookInsertDTO>();
+        //public ICollection<BookInsertDTO>? Books { get; set; } = new List<BookInsertDTO>();
         public ICollection<UrlInsertDTO> URLS { get; set; } = new List<UrlInsertDTO>();
+        //public ICollection<FileArchive>? Files { get; set; } = new List<FileArchive>();
     }
 
     public class AuthorUpdateDTO
