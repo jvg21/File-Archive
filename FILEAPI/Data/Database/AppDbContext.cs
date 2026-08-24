@@ -11,14 +11,15 @@ namespace FILEAPI.Data.Database
 
         public DbSet<Author> Author { get; set; }
         public DbSet<Book> Book { get; set; }
-
         public DbSet<Url> Url { get; set; }
+        public DbSet<FileArchiveMap> File { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AuthorMap());
             modelBuilder.ApplyConfiguration(new BookMap());
             modelBuilder.ApplyConfiguration(new UrlMap());
+            modelBuilder.ApplyConfiguration(new FileArchiveMap());
         }
     }
 }

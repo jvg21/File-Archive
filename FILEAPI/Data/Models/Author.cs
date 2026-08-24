@@ -20,7 +20,7 @@
     public class AuthorInsertDTO
     {
         public string Name { get; set; } = string.Empty;
-        //public ICollection<Models.Book> Books { get; set; } = new List<Models.Book>();
+        public ICollection<BookInsertDTO>? Books { get; set; } = new List<BookInsertDTO>();
         public ICollection<UrlInsertDTO> URLS { get; set; } = new List<UrlInsertDTO>();
     }
 

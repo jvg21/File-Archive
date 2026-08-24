@@ -41,10 +41,12 @@ namespace FILEAPI.Services
 
         public async Task<BookGetDTO> Update(BookUpdateDTO bookDto)
         {
+            /*Verify Values*/
             if (bookDto == null) throw new InvalidFormException();
+            if (bookDto.Rating != null && (bookDto.Rating > 10 || bookDto.Rating < 0)) throw new InvalidFormException("Rating Value Invalid, must be between 0 and 10");
+            if (bookDto.CurrentChapter != null && bookDto.TotalChapters!=null && (bookDto.CurrentChapter>bookDto.TotalChapters) ) throw new InvalidFormException("Current Chapter Value Higher Than Total Chapters");
 
             Book? book = await _bookRepository.GetById(bookDto.Id);
-
             if (book == null) throw new EntityNotFoundException();
 
             /****update values*/
@@ -63,13 +65,13 @@ namespace FILEAPI.Services
             var request = await _bookRepository.Update(book);
             return request.Adapt<BookGetDTO>();
 
-
         }
 
         public async Task Delete(int id)
         {
             Book? book = await _bookRepository.GetById(id);
             if (book == null) throw new EntityNotFoundException();
+
             await _bookRepository.Delete(book);
         }
     }
