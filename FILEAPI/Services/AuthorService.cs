@@ -2,6 +2,7 @@
 
 using FILEAPI.Data.Models;
 using FILEAPI.Data.Request.Exceptions;
+using FILEAPI.Repository;
 using FILEAPI.Repository.Interfaces;
 using FILEAPI.Services.Interfaces;
 using Mapster;
@@ -13,12 +14,9 @@ namespace FILEAPI.Services
     {
         private readonly IAuthorRepository _authorRepository;
 
-        private readonly IBookService _bookService;
-
         public AuthorService(IAuthorRepository authorRepository, IBookService bookService)
         {
             this._authorRepository = authorRepository;
-            this._bookService = bookService;
         }
 
         public async Task<List<AuthorGetDTO>> GetAll()

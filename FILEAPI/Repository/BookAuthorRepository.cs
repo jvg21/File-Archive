@@ -13,15 +13,15 @@ namespace FILEAPI.Repository
             this._context = context;
         }
 
-        public async Task<bool> Exists(int idBook, int idAuthor)
+        public async Task<bool> Exists(BookAuthor bookAuthor)
         {
-            return await _context.Author.Where(a => a.Id == idAuthor).SelectMany(a => a.Books).AnyAsync(b => b.Id == idBook);
+            return await _context.Author.Where(a => a.Id == bookAuthor.IdAuthor).SelectMany(a => a.Books).AnyAsync(b => b.Id == bookAuthor.IdBook);
         }
 
-        public async Task LinkBookToAuthor(int idBook, int idAuthor)
+        public async Task LinkBookToAuthor(BookAuthor bookAuthor)
         {
-            var book = new Book { Id = idBook };
-            var author = new Author { Id = idAuthor };
+            var book = new Book { Id = bookAuthor.IdBook };
+            var author = new Author { Id = bookAuthor.IdAuthor };
 
             _context.Attach(book);
             _context.Attach(author);
@@ -31,16 +31,16 @@ namespace FILEAPI.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteLinkBookToAuthor(int idBook, int idAuthor)
+        public async Task DeleteLinkBookToAuthor(BookAuthor bookAuthor)
         {
 
             var book = await _context.Book
-                .Include(b => b.Authors.Where(a => a.Id == idAuthor))
-                .FirstOrDefaultAsync(b => b.Id == idBook);
+                .Include(b => b.Authors.Where(a => a.Id == bookAuthor.IdAuthor))
+                .FirstOrDefaultAsync(b => b.Id == bookAuthor.IdBook);
 
             if (book == null) return;
 
-            var author = book.Authors.FirstOrDefault(a => a.Id == idAuthor);
+            var author = book.Authors.FirstOrDefault(a => a.Id == bookAuthor.IdAuthor);
             if (author != null)
             {
                 book.Authors.Remove(author);
