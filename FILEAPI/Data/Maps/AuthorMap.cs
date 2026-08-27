@@ -4,9 +4,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FILEAPI.Data.Maps
 {
-    public class AuthorMap :IEntityTypeConfiguration<Author>
+    public class AuthorMap : IEntityTypeConfiguration<Author>
     {
-        public void Configure(EntityTypeBuilder<Author> builder) {
+        public void Configure(EntityTypeBuilder<Author> builder)
+        {
 
             builder.ToTable("author");
 
@@ -18,7 +19,20 @@ namespace FILEAPI.Data.Maps
 
             // N Author <--> N Book
 
-            builder.HasMany(a => a.Books).WithMany(b => b.Authors).UsingEntity(j => j.ToTable("Book_Author"));
+            builder.HasMany(a => a.Books)
+             .WithMany(b => b.Authors)
+             .UsingEntity<BookAuthor>(
+                 j => j.HasOne(ba => ba.Book)
+                       .WithMany()
+                       .HasForeignKey(ba => ba.IdBook),
+                 j => j.HasOne(ba => ba.Author)
+                       .WithMany()
+                       .HasForeignKey(ba => ba.IdAuthor),
+                 j =>
+                 {
+                     j.HasKey(ba => new { ba.IdBook, ba.IdAuthor });
+                     j.ToTable("book_author");
+                 });
 
         }
     }

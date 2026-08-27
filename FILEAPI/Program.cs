@@ -43,9 +43,12 @@ builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IBookService, BookService>();
-
+builder.Services.AddScoped<IBookAuthorRepository,BookAuthorRepository>();
+builder.Services.AddScoped<IBookAuthorService,BookAuthorService>() ;
 builder.Services.AddScoped<IUrlRepository, UrlRepository>();
 builder.Services.AddScoped<IUrlService, UrlService>();
+
+
 
 #endregion
 

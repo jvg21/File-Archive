@@ -15,15 +15,15 @@ namespace FILEAPI.Repository
 
         public async Task<List<Author>> GetAll() { 
         
-            return await _context.Author.AsNoTracking().Include(a=>a.URLS).ToListAsync();
+            return await _context.Author.AsNoTracking().Include(a=>a.URLS).Include(a => a.Books).ToListAsync();
         }
 
         public async Task<Author?> GetById(int id) {
-            return await _context.Author.Include(a => a.URLS).FirstOrDefaultAsync(a => a.Id == id);
+            return await _context.Author.Include(a => a.URLS).Include(a => a.Books).FirstOrDefaultAsync(a => a.Id == id);
         }
         public async Task<List<Author>> Get(Expression<Func<Author, bool>> predicate)
         {
-            return await _context.Author.Where(predicate).Include(a => a.URLS).ToListAsync();
+            return await _context.Author.Where(predicate).Include(a => a.URLS).Include(a => a.Books).ToListAsync();
         }
 
         public async Task<bool> Exists(Expression<Func<Author, bool>> predicate)

@@ -14,9 +14,15 @@
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public ICollection<Models.Book> Books { get; set; } = new List<Models.Book>();
+        public ICollection<BookGetSummaryDTO> Books { get; set; } = new List<BookGetSummaryDTO>();
         public ICollection<UrlGetDTO> URLS { get; set; } = new List<UrlGetDTO>();
         public ICollection<FileArchive>? Files { get; set; } = new List<FileArchive>();
+    }
+
+    public class AuthorGetSummaryDTO
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
 
     public class AuthorInsertDTO
@@ -31,6 +37,5 @@
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-
     }
 }
