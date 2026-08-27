@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom"
 import { Layout } from "../../UI/Components/Global/layout"
 import { ProtectedRoute } from "./protectedRoute"
 import { PublicRoute } from "./publicRoute"
+import { NotFoundPage } from "../../Pages/notFound.page"
 
 export const AppRouter = () => {
 
@@ -13,12 +14,18 @@ export const AppRouter = () => {
             </Route>
 
             <Route element={<ProtectedRoute />}>
-                <Route path='/' element={<Layout />} />
+                <Route element={<Layout />} >
+                    <Route path="/" element={<p>adsdsa</p>} />
+                    <Route path="/book" element={<p>book</p>} />
+                    <Route path="/author" element={<p>author</p>} />
+                </Route>
             </Route>
+
+            <Route path="*"  element={<NotFoundPage/>}/>
         </Routes>
 
 
     )
 
 
-}
+} 
