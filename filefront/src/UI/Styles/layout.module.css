@@ -2,6 +2,11 @@
 
     width: 100%;
     min-height: 100vh;
-    display: flex;
     flex-direction: row;
+    background-color: rgb(109, 138, 4);
+}
+
+.outlet{
+    min-height: inherit;
+    background-color: rgb(29, 119, 119);
 }

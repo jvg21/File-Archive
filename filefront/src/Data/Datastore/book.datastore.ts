@@ -1,11 +1,56 @@
-export class BookDataStore  {
+import { Config } from "../../config/config";
+import { RequestReturn } from "../Types/RequestReturn";
 
-    async getAll(){
-        try{
+export class BookDataStore {
 
-        }catch(e){
-            
+    private readonly URL = `${Config.apiHost}/book`
+
+    async getAll(): Promise<RequestReturn> {
+        const response = new RequestReturn();
+        try {
+            const request = await fetch(`${this.URL}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // credentials: 'include'
+            })
+
+            response.status = request.status
+
+            if (response.status !== 200) {
+                response.message
+                return response;
+            };
+
+            response.data = request.json();
+            response.message = "Data Retrived"
+
+        } catch (e) {
+            console.log("erro")
+        } finally {
+            return response;
         }
 
     }
+
+    //  async getAll(): Promise<RequestReturn> {
+    //     const response = new RequestReturn();
+    //     try {
+    //         const request = await fetch(`${this.URL}`,{
+    //             method:'GET',
+    //             headers:{
+    //                 'Content-Type':'application/json'
+    //             },
+    //             credentials:'include'
+    //         },
+    //     )
+
+    //     } catch (e) {
+
+    //     } finally {
+    //         return response;
+    //     }
+
+    // }
 }

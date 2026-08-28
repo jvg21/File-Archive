@@ -52,6 +52,25 @@ builder.Services.AddScoped<IUrlService, UrlService>();
 
 #endregion
 
+
+# region CORS
+var corsPolicyName = "DefaultCorsPolicy";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corsPolicyName, policy =>
+    {
+        policy.WithOrigins("http://localhost:5174", "http://localhost:5173")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+        // .AllowCredentials(); // só se precisar enviar cookies/auth headers, e nesse caso não pode usar AllowAnyOrigin
+
+    });
+});
+
+#endregion
+
+
 var app = builder.Build();
 
 #region Development
@@ -71,6 +90,8 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
+
+app.UseCors("DefaultCorsPolicy");
 
 app.UseAuthorization();
 
