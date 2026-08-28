@@ -3,13 +3,13 @@ import type { BookEntity } from "./book.entity";
 
 
 export interface FileArchive  {
-    Id: number,
-    Name: string,
-    StorageName: string,
-    Extension: string,
-    MimeType: string,
-    Path: string,
-    StorageBytes:number
-    Author?: AuthorEntity,
-    Book?: BookEntity,
+    id: number,
+    name: string,
+    storageName: string,
+    extension: string,
+    mimeType: string,
+    path: string,
+    storageBytes:number
+    author?: AuthorEntity,
+    book?: BookEntity,
 }

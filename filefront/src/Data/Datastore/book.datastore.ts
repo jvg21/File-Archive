@@ -22,15 +22,15 @@ export class BookDataStore {
                 response.message
                 return response;
             };
+            response.data = await request.json();
 
-            response.data = request.json();
+            
             response.message = "Data Retrived"
-
         } catch (e) {
             console.log("erro")
-        } finally {
-            return response;
         }
+
+        return response;
 
     }
 

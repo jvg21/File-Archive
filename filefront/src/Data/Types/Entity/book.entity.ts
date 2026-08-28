@@ -3,17 +3,18 @@ import type { FileArchive } from "./fileArchive.entity";
 import type { UrlEntity } from "./url.entity";
 
 
-export interface BookEntity  {
-    Id: number,
-    Name: string,
-    Summary: string,
-    CurrentChapter?: number,
-    TotalChapters?: number,
-    Rating?: number,
-    Words?: number,
-    ReadingStatus?: number,
-    WritingStatus?: number,
-    Authors?: AuthorEntity[],
-    URLS?: UrlEntity[],
-    Files?: FileArchive[],
+export interface BookEntity {
+    id: number;
+    name: string;
+    summary: string;
+    notes?: string;
+    currentChapter?: number;
+    totalChapters?: number;
+    rating?: number;
+    words?: number;
+    readingStatus?: number;
+    writingStatus?: number;
+    authors: AuthorEntity[];
+    files: FileArchive[];
+    urls: UrlEntity[];
 }
