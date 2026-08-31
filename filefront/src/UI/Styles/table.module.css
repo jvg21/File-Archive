@@ -45,18 +45,28 @@
 
 /*Modificadores*/
 
-.sm{
+.sm {
     min-width: 20px;
 }
 
-.md{
+.md {
     min-width: 50px;
 }
 
-.lg{
+.lg {
     min-width: 90px;
 }
 
+.urls {
+    list-style-type: none;
+    text-transform: uppercase;
+
+    a {
+        /* color: var(--text-h); */
+        color: var(--accent);
+        text-decoration: none;
+    }
+}
 
 
 /* Texto vazio */
@@ -93,6 +103,80 @@
 
 .tableWrapper::-webkit-scrollbar-thumb:hover {
     background-color: var(--text);
+}
+
+/*Pagination*/
+
+.pagination {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    padding: 14px 18px;
+}
+
+.pagination button {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background-color: transparent;
+    color: var(--text-h);
+
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+
+    transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: var(--accent-bg);
+}
+
+.pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.paginationInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 14px;
+    color: var(--text);
+}
+
+.paginationInput {
+    width: 48px;
+    padding: 6px 8px;
+
+    border: 1px solid var(--border);
+    border-radius: 6px;
+
+    background-color: transparent;
+    color: var(--text-h);
+
+    font-size: 14px;
+    text-align: center;
+
+    /* remove as setinhas do input number */
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.paginationInput::-webkit-outer-spin-button,
+.paginationInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.paginationInput:focus {
+    outline: none;
+    border-color: var(--accent-border);
 }
 
 /* Responsividade */

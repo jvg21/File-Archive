@@ -2,7 +2,8 @@ import type { BookEntity } from "../../../../Data/Types/Entity/book.entity";
 import { ReadingStatusEnum } from "../../../../Utils/Enums/readingStatus.enum";
 import { WritingStatusEnum } from "../../../../Utils/Enums/writingStatus.enum";
 import type { TableColumns } from "../table.component";
-
+import style from '../../../Styles/table.module.css'
+import { Link } from "react-router-dom";
 export const BookColums: TableColumns<BookEntity>[] = [
     { key: 'id', header: 'Id' },
     { key: "name", header: "Name" },
@@ -11,8 +12,12 @@ export const BookColums: TableColumns<BookEntity>[] = [
         render: (value) => {
             const authors = value as BookEntity["authors"];
 
-            return authors && authors.length > 0
-                ? authors.map(a => <p>{a.name}</p>)
+            return authors && authors.length > 0 ?
+                authors.map(a =>
+                    <div key={a.id} className={style.urls} >
+                        <Link to={`/author/${a.id}`}>{a.name}</Link><br />
+                    </div>
+                )
                 : '';
         }
     },
@@ -21,9 +26,15 @@ export const BookColums: TableColumns<BookEntity>[] = [
         render: (value) => {
             const urls = value as BookEntity["urls"];
 
-            return urls && urls.length > 0 ?
-                urls.map(url => <a target="_blank" href={url.content}>{url.name}</a>)
-                : '';
+            return urls && urls.length > 0 &&
+                <ul className={style.urls} >
+                    {
+                        urls.map(url =>
+                            <li key={url.id}><a target="_blank" href={url.content}>{url.name.slice(0, 10)}</a></li>
+                        )
+                    }
+                </ul>
+
         }
     },
     {
@@ -36,9 +47,7 @@ export const BookColums: TableColumns<BookEntity>[] = [
     {
         key: "currentChapter", header: "Chapters",
         render: (value, row) => {
-
             return `${value ?? '-'} / ${row.totalChapters ?? '??'}`
-
         }
     },
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { BookDataStore } from "../Data/Datastore/book.datastore"
 import { Table,} from "../UI/Components/Table/table.component"
 import pageStyle from '../UI/Styles/pages.module.css'
-import { BookColums } from "../UI/Components/Table/TableColumnsProps/BookColumns";
+import { BookColums } from "../UI/Components/Table/TableColumnsProps/book.columns";
 
 
 export const BookPage = () => {
@@ -30,6 +30,7 @@ export const BookPage = () => {
                 tableColumn={BookColums}
                 tableData={bookData ?? []}
                 keyExtractor={(row) => row.id}
+                initialPageSize={5}
             />
         </div>
     )
