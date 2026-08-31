@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom"
-import { Layout } from "../../UI/Components/Global/layout"
+import { Layout } from "../../UI/Components/Global/layout.component"
 import { ProtectedRoute } from "./protectedRoute"
 import { PublicRoute } from "./publicRoute"
 import { NotFoundPage } from "../../Pages/notFound.page"

@@ -30,7 +30,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
                         <Link to={`/${item.id}`} className={`${style.sidebarButton} ${!isExpanded ? style.colapsed : ''}`} >
                             {item.logo} <span>{item.label}</span>
                         </Link>
-                        <span className={`${style.sidebarToolkit} ${isExpanded ? style.colapsed : ''}`}>
+                        <span className={`${style.sidebarToolkit} ${!isExpanded ? style.colapsed : ''}`}>
                             {item.label}
                         </span>
                     </div>

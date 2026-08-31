@@ -2,7 +2,6 @@
     width: 100%;
     overflow-x: auto;
     border: 1px solid var(--border);
-    border-radius: 12px;
     background-color: var(--background);
 }
 
@@ -17,60 +16,48 @@
 
 /* Cabeçalho */
 .table thead {
-    background-color: var(--accent-bg);
+    background-color: var(--accent);
 }
 
 .table th {
-    padding: 14px 18px;
+    padding: 6px 20px;
     text-align: left;
     font-weight: 600;
     font-size: 13px;
-    color: var(--text-h);
+    color: var(--text);
     white-space: nowrap;
-    border-bottom: 1px solid var(--border);
-}
-
-/* Primeira coluna */
-.table th:first-child {
-    border-top-left-radius: 12px;
-}
-
-/* Última coluna */
-.table th:last-child {
-    border-top-right-radius: 12px;
+    text-wrap: pretty;
 }
 
 /* Corpo */
 .table td {
-    padding: 14px 18px;
-    color: var(--text);
-    border-bottom: 1px solid var(--border);
+    padding: 6px 18px;
+    color: var(--text-h);
+    /* border: 0.2px solid var(--border); */
+    border-bottom: 2px solid var(--border);
     vertical-align: middle;
-    transition: background-color 0.15s ease;
-}
-
-/* Linhas */
-.table tbody tr {
-    transition: background-color 0.15s ease;
 }
 
 .table tbody tr:hover td {
     background-color: var(--accent-bg);
+    transition: background-color 0.55s ease;
 }
 
-/* Remove borda da última linha */
-.table tbody tr:last-child td {
-    border-bottom: none;
+/*Modificadores*/
+
+.sm{
+    min-width: 20px;
 }
 
-/* Cantos inferiores */
-.table tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 12px;
+.md{
+    min-width: 50px;
 }
 
-.table tbody tr:last-child td:last-child {
-    border-bottom-right-radius: 12px;
+.lg{
+    min-width: 90px;
 }
+
+
 
 /* Texto vazio */
 .empty {
@@ -87,9 +74,9 @@
     font-size: 14px;
 
     border: 1px dashed var(--border);
-    border-radius: 12px;
     background-color: var(--background);
 }
+
 
 /* Scrollbar */
 .tableWrapper::-webkit-scrollbar {
@@ -102,7 +89,6 @@
 
 .tableWrapper::-webkit-scrollbar-thumb {
     background-color: var(--border);
-    border-radius: 10px;
 }
 
 .tableWrapper::-webkit-scrollbar-thumb:hover {

@@ -1,4 +1,4 @@
-import { Config } from "../../config/config";
+import { Config } from "../../Config/config";
 import { RequestReturn } from "../Types/RequestReturn";
 
 export class BookDataStore {
@@ -34,23 +34,33 @@ export class BookDataStore {
 
     }
 
-    //  async getAll(): Promise<RequestReturn> {
-    //     const response = new RequestReturn();
-    //     try {
-    //         const request = await fetch(`${this.URL}`,{
-    //             method:'GET',
-    //             headers:{
-    //                 'Content-Type':'application/json'
-    //             },
-    //             credentials:'include'
-    //         },
-    //     )
+     async getById(id:number): Promise<RequestReturn> {
+        const response = new RequestReturn();
+        try {
+            const request = await fetch(`${this.URL}/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // credentials: 'include'
+            })
 
-    //     } catch (e) {
+            response.status = request.status
 
-    //     } finally {
-    //         return response;
-    //     }
+            if (response.status !== 200) {
+                response.message
+                return response;
+            };
+            response.data = [...await request.json()];
 
-    // }
+            
+            response.message = "Data Retrived"
+        } catch (e) {
+            console.log("erro")
+        }
+
+        return response;
+
+    }
+
 }
