@@ -3,7 +3,7 @@ import { Layout } from "../../UI/Components/Global/layout.component"
 import { ProtectedRoute } from "./protectedRoute"
 import { PublicRoute } from "./publicRoute"
 import { NotFoundPage } from "../../Pages/notFound.page"
-import { BookPage } from "../../Pages/book.page"
+import { BookPage } from "../../Pages/Book/book.page"
 
 export const AppRouter = () => {
 

@@ -1,9 +1,12 @@
-import type { BookEntity } from "../../../../Data/Types/Entity/book.entity";
-import { ReadingStatusEnum } from "../../../../Utils/Enums/readingStatus.enum";
-import { WritingStatusEnum } from "../../../../Utils/Enums/writingStatus.enum";
-import type { TableColumns } from "../table.component";
-import style from '../../../Styles/table.module.css'
+
+import style from '../../UI/Styles/table.module.css'
 import { Link } from "react-router-dom";
+import type { BookEntity } from '../../Data/Types/Entity/book.entity';
+import type { TableColumns } from '../../UI/Components/Table/table.component';
+import { ReadingStatusEnum } from '../../Utils/Enums/readingStatus.enum';
+import { WritingStatusEnum } from '../../Utils/Enums/writingStatus.enum';
+
+
 export const BookColums: TableColumns<BookEntity>[] = [
     { key: 'id', header: 'Id' },
     { key: "name", header: "Name" },
@@ -74,3 +77,4 @@ export const BookColums: TableColumns<BookEntity>[] = [
     { key: "words", header: "Words" },
     { key: "rating", header: "Rating" },
 ]
+

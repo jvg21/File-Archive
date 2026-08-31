@@ -168,6 +168,24 @@
     appearance: textfield;
 }
 
+.paginationSelect {
+    padding: 6px 8px;
+
+    border: 1px solid var(--border);
+    border-radius: 6px;
+
+    background-color: transparent;
+    color: var(--text-h);
+
+    font-size: 14px;
+    text-align: center;
+
+    /* remove as setinhas do input number */
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+
 .paginationInput::-webkit-outer-spin-button,
 .paginationInput::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -177,6 +195,56 @@
 .paginationInput:focus {
     outline: none;
     border-color: var(--accent-border);
+}
+
+/* =========================
+   ACTIONS
+========================= */
+.actionsCell {
+    vertical-align: middle;
+}
+
+.actionsContainer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.actionButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+    padding: 0;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background-color: transparent;
+    color: var(--text-h);
+
+    font-size: 13px;
+    cursor: pointer;
+
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.actionButton svg {
+    width: 16px;
+    height: 16px;
+}
+
+.actionButton:hover {
+    background-color: var(--accent-bg);
+    color: var(--text-h);
+    border-color: var(--accent-border);
+}
+
+.actionButton:active {
+    transform: scale(0.94);
 }
 
 /* Responsividade */
