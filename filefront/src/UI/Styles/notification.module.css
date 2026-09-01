@@ -20,7 +20,7 @@
 }
 
 .failure {
-    border: 2px solid var(--failure-red);
+    border: 3px solid var(--failure-red);
 
     h3 {
         color: var(--failure-red)
@@ -28,14 +28,14 @@
 }
 
 .success {
-    border: 2px solid var(--success-green);
+    border: 3px solid var(--success-green);
     h3 {
         color: var(--success-green)
     }
 }
 
 .warning {
-    border: 2px solid var(--warning-yellow);
+    border: 3px solid var(--warning-yellow);
     h3 {
         color: var(--warning-yellow)
     }

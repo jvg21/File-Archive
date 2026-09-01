@@ -12,9 +12,9 @@ import { useNotification } from "../../Data/Context/notification.context";
 
 export const BookPage = () => {
 
-    /**/
-
+    /*hooks*/
     const { showNotification } = useNotification()
+
     /*Datastores*/
     const bookDataStore = new BookDataStore();
 
@@ -25,8 +25,6 @@ export const BookPage = () => {
     /**PageStates */
     const [formModal, setFormModal] = useState<boolean>(false);
     const [_, setModalPage] = useState<'edit' | 'delete'>('edit');
-
-
 
 
     /**CRUD FUNCIOTIONS */
