@@ -1,5 +1,6 @@
 .tableWrapper {
     width: 100%;
+    min-width: 500px;
     overflow-x: auto;
     border: 1px solid var(--border);
     background-color: var(--background);
@@ -60,6 +61,7 @@
 .urls {
     list-style-type: none;
     text-transform: uppercase;
+    font-weight: 600;
 
     a {
         /* color: var(--text-h); */
@@ -109,6 +111,7 @@
 
 .pagination {
     width: 100%;
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -169,6 +172,7 @@
 }
 
 .paginationSelect {
+    display: flex;
     padding: 6px 8px;
 
     border: 1px solid var(--border);

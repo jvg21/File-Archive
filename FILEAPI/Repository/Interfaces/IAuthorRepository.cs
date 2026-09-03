@@ -8,7 +8,6 @@ namespace FILEAPI.Repository.Interfaces
         Task<List<Author>> GetAll();
         Task<Author?> GetById(int id);
         Task<List<Author>> Get(Expression<Func<Author, bool>> predicate);
-        
         Task<bool> Exists(Expression<Func<Author, bool>> predicate);
 
         Task<Author> Insert(Author author);

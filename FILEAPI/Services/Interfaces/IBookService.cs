@@ -6,8 +6,7 @@ namespace FILEAPI.Services.Interfaces
     public interface IBookService
     {
         Task<List<BookGetDTO>> GetAll();
-        Task<BookGetDTO?> GetById(int id);
-        //Task<bool> Exists(int id);
+        Task<BookGetDTO> GetById(int id);
         Task<BookGetDTO> Insert(BookInsertDTO book);
         Task<BookGetDTO> Update(BookUpdateDTO book);
         Task Delete(int id);

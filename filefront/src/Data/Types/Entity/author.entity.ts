@@ -4,6 +4,6 @@ import type { UrlEntity } from "./url.entity";
 export interface AuthorEntity  {
     id:number,
     name:string,
-    url?: UrlEntity[],
+    urls?: UrlEntity[],
     books?:BookEntity[]
 }

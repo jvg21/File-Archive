@@ -23,6 +23,7 @@ export type TableProps<T> = {
     emptyMessage?: string,
     keyExtractor?: (row: T) => string | number,
     initialPageSize: number,
+    onRowClick: (row: T) => void
     // resetFuncition: () => void,
     actions?: TableActions<T>[],
     pagination?: boolean
@@ -33,6 +34,7 @@ export function Table<T extends Object>({
     tableColumn,
     actions = [],
     keyExtractor,
+    onRowClick,
     emptyMessage = "No Data",
     initialPageSize = 25,
     pagination = true,
@@ -55,25 +57,10 @@ export function Table<T extends Object>({
 
 
     {/**NO DATA*/ }
-    if (tableData.length <= 0) {
-        return <div className={style.empty}>{emptyMessage}</div>
-    }
-
+    if (tableData.length <= 0) return <div className={style.empty}>{emptyMessage}</div>
 
     return (
         <div className={style.tableWrapper}>
-
-
-            { /***PAGINATION**** */}
-            {pagination && <TablePagination
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                totalPages={totalPages}
-                currentPageSize={pageSize}
-                setPageSize={setPageSize}
-
-            />}
-
             {/******TABLE***** */}
             <table className={style.table}>
                 <thead >
@@ -93,7 +80,7 @@ export function Table<T extends Object>({
                 <tbody>
                     {
                         paginatedData.map((row, index) =>
-                            <tr key={
+                            <tr onClick={()=>{onRowClick(row)}} key={
                                 keyExtractor ? keyExtractor(row) : index
 
                             }>
@@ -140,7 +127,15 @@ export function Table<T extends Object>({
 
             </table>
 
+            { /***PAGINATION**** */}
+            {pagination && <TablePagination
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                totalPages={totalPages}
+                currentPageSize={pageSize}
+                setPageSize={setPageSize}
 
+            />}
         </div>
     )
 }

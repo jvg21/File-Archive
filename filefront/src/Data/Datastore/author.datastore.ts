@@ -1,9 +1,9 @@
 import { Config } from "../../Config/config";
 import { RequestReturn } from "../Types/RequestReturn";
 
-export class BookDataStore {
+export class AuthorDataStore {
 
-    private readonly URL = `${Config.apiHost}/book`
+    private readonly URL = `${Config.apiHost}/author`
 
     async getAll(): Promise<RequestReturn> {
         const response = new RequestReturn();

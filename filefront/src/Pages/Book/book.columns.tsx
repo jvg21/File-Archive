@@ -3,11 +3,11 @@ import style from '../../UI/Styles/table.module.css'
 import { Link } from "react-router-dom";
 import type { BookEntity } from '../../Data/Types/Entity/book.entity';
 import type { TableColumns } from '../../UI/Components/Table/table.component';
-import { ReadingStatusEnum } from '../../Utils/Enums/readingStatus.enum';
-import { WritingStatusEnum } from '../../Utils/Enums/writingStatus.enum';
+import { ReadingStatusEnum } from '../../Data/Enums/readingStatus.enum';
+import { WritingStatusEnum } from '../../Data/Enums/writingStatus.enum';
 
 
-export const BookColums: TableColumns<BookEntity>[] = [
+export const BookColumns: TableColumns<BookEntity>[] = [
     { key: 'id', header: 'Id' },
     { key: "name", header: "Name" },
     {
@@ -44,7 +44,7 @@ export const BookColums: TableColumns<BookEntity>[] = [
         key: "summary", header: "Summary",
         render: (value) => {
             const summary = value as BookEntity['summary']
-            return summary.slice(0, 30)
+            return summary?summary.slice(0, 30):""
         },
     },
     {

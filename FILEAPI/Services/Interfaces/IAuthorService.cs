@@ -5,8 +5,7 @@ namespace FILEAPI.Services.Interfaces
     public interface IAuthorService
     {
         Task<List<AuthorGetDTO>> GetAll();
-        Task<AuthorGetDTO?> GetById(int id);
-        //Task<bool> Exists(int id);
+        Task<AuthorGetDTO> GetById(int id);
         Task<AuthorGetDTO> Insert(AuthorInsertDTO author);
         Task<AuthorGetDTO> Update(AuthorUpdateDTO author);
         Task Delete(int id);

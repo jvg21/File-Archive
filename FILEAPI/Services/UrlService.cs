@@ -25,9 +25,10 @@ namespace FILEAPI.Services
             return request.Adapt<List<UrlGetDTO>>();
         }
 
-        public async Task<UrlGetDTO?> GetById(int id)
+        public async Task<UrlGetDTO> GetById(int id)
         {
             var request = await _urlRepository.GetById(id);
+            if (request == null) throw new EntityNotFoundException();
             return request.Adapt<UrlGetDTO>();
         }
 
