@@ -60,17 +60,22 @@ export const BookForm = (props: BookFormProps) => {
                 <div className={style.field}>
                     <label>Url: </label>
                     <input type='text' value={ulrField?.name ?? ""} placeholder="name"
-                        onChange={(e) => { setUrlField((prev) => ({ name: e.target.value, content: prev?.content ?? "" })) }}
+
+                        onChange={(e) => {
+                            setUrlField((prev) => ({ name: e.target.value, content: prev?.content ?? "" }))
+                        }}
                     />
                     <input type='text' value={ulrField?.content ?? ""} placeholder="content"
-                        onChange={(e) => { setUrlField((prev) => ({ content: e.target.value, name: prev?.content ?? "" })) }}
+                        onChange={(e) => {
+                            setUrlField((prev) => ({ name: prev?.name ?? "", content: e.target.value }))
+                        }}
                     />
 
                     <button type="button" onClick={handdleAddUrl}>Add Url</button>
                 </div>
 
                 {
-                    entity.urls && entity.urls.length > 0 &&
+                    entity.urls.length > 0 &&
                     entity.urls.map((url) =>
                         <p>{url.name} - {url.content}</p>
                     )
