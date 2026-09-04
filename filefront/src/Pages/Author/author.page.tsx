@@ -3,7 +3,7 @@ import { Table, type TableActions, } from "../../UI/Components/Table/table.compo
 import pageStyle from '../../UI/Styles/pages.module.css'
 import { AiFillEdit } from "react-icons/ai";
 import { FaRegTrashAlt } from "react-icons/fa";
-import type { RequestReturn } from "../../Data/Types/RequestReturn";
+import type { RequestReturn } from "../../Data/Types/requestReturn";
 import { useNotification } from "../../Data/Context/notification.context";
 import { ModalFrame } from "../../UI/Components/Global/modal.component";
 import type { AuthorEntity } from "../../Data/Types/Entity/author.entity";

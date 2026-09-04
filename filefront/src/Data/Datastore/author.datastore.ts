@@ -1,5 +1,5 @@
 import { Config } from "../../Config/config";
-import { RequestReturn } from "../Types/RequestReturn";
+import { RequestReturn } from "../Types/requestReturn";
 
 export class AuthorDataStore {
 

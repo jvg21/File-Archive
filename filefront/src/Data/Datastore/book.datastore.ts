@@ -1,9 +1,11 @@
 import { Config } from "../../Config/config";
-import { RequestReturn } from "../Types/RequestReturn";
+import type { BookEntity } from "../Types/Entity/book.entity";
+import { RequestReturn } from "../Types/requestReturn";
 
 export class BookDataStore {
 
     private readonly URL = `${Config.apiHost}/book`
+
 
     async getAll(): Promise<RequestReturn> {
         const response = new RequestReturn();
@@ -19,7 +21,6 @@ export class BookDataStore {
 
             response.status = request.status;
             if (response.status !== 200) {
-
                 const data = await request.json()
                 response.message = data.message || "Error retrieving data";
                 return response;
@@ -52,7 +53,7 @@ export class BookDataStore {
             if (response.status !== 200) {
 
                 const data = await request.json()
-                response.message = data.message || "Error retrieving data";
+                response.message = data.message || "";
                 return response;
             };
 
@@ -66,4 +67,96 @@ export class BookDataStore {
         return response;
     }
 
+    async create(entity:BookEntity): Promise<RequestReturn> {
+        const response = new RequestReturn();
+
+        try {
+            const request = await fetch(`${this.URL}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify( entity )
+                // credentials: 'include'
+            })
+
+            response.status = request.status;
+            if (response.status !== 201) {
+
+                const data = await request.json()
+                response.message = data.message || "";
+                return response;
+            };
+
+            response.data = [...await request.json()];
+            response.message = "Created"
+
+        } catch (e) {
+
+            response.message = "Error Creating";
+        }
+        return response;
+    }
+
+
+    async update(entity:BookEntity): Promise<RequestReturn> {
+        const response = new RequestReturn();
+
+        try {
+            const request = await fetch(`${this.URL}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify( entity )
+                // credentials: 'include'
+            })
+
+            response.status = request.status;
+            if (response.status !== 201) {
+
+                const data = await request.json()
+                response.message = data.message || "";
+                return response;
+            };
+
+            response.data = [...await request.json()];
+            response.message = "Updated"
+
+        } catch (e) {
+
+            response.message = "Error Updating";
+        }
+        return response;
+    }
+
+    async delete(id: number): Promise<RequestReturn> {
+        const response = new RequestReturn();
+
+        try {
+            const request = await fetch(`${this.URL}/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // credentials: 'include'
+            })
+
+            response.status = request.status;
+            if (response.status !== 200) {
+
+                const data = await request.json()
+                response.message = data.message || "";
+                return response;
+            };
+
+            // response.data = [...await request.json()];
+            response.message = "Deleted"
+
+        } catch (e) {
+
+            response.message = "Error Deleting";
+        }
+        return response;
+    }
 }

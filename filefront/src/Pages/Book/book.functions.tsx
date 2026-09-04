@@ -1,8 +1,11 @@
+
 import type { BookEntity } from "../../Data/Types/Entity/book.entity";
 
-export function generateEmptyBook(): BookEntity {
+type Entity = BookEntity;
+
+export function generateEmptyBook(): Entity {
     return {
-        id:-1,
+        id: -1,
         name: "",
         summary: "",
         currentChapter: 0,

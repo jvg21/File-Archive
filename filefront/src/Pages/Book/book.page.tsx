@@ -3,25 +3,25 @@ import { Table, type TableActions, } from "../../UI/Components/Table/table.compo
 import pageStyle from '../../UI/Styles/pages.module.css'
 import { AiFillEdit } from "react-icons/ai";
 import { FaRegTrashAlt } from "react-icons/fa";
-import type { RequestReturn } from "../../Data/Types/RequestReturn";
-import { useNotification } from "../../Data/Context/notification.context";
 import { ModalFrame } from "../../UI/Components/Global/modal.component";
 import type { BookEntity } from "../../Data/Types/Entity/book.entity";
 import { BookColumns } from "./book.columns";
-import { BookDataStore } from "../../Data/Datastore/book.datastore";
 import type { ModalFlow } from "../../Data/Types/modalFlow";
 import { BookForm } from "./book.form";
+import { useNotification } from "../../Data/Context/notification.context";
+import type { RequestReturn } from "../../Data/Types/requestReturn";
+import { BookDataStore } from "../../Data/Datastore/book.datastore";
 import { generateEmptyBook } from "./book.functions";
+
 
 type Entity = BookEntity;
 const TableColumns = BookColumns;
 
 export const BookPage = () => {
-
-    /*hooks*/
+    /**Hooks**/
     const { showNotification } = useNotification()
 
-    /*Datastores*/
+    /*****DataStore****/
     const DataStore = new BookDataStore();
 
     /*book table data*/
@@ -32,9 +32,9 @@ export const BookPage = () => {
     const [formModal, setFormModal] = useState<boolean>(false);
     const [modalPage, setModalPage] = useState<ModalFlow>('edit');
 
+    /**GET FUNCIOTIONS */
+    async function getBookData(): Promise<void> {
 
-    /**CRUD FUNCIOTIONS */
-    const getBookData = async () => {
         const request: RequestReturn = await DataStore.getAll();
 
         if (request.status !== 200) {
@@ -44,11 +44,62 @@ export const BookPage = () => {
         setTableData(request.data as Entity[])
     };
 
-
     useEffect(() => {
         getBookData();
 
     }, [])
+
+    /******SUBMIT FUNCIOTIONS ***********/
+    async function createBook(): Promise<void> {
+        if (!selectedEntity || !selectedEntity.name) return;
+
+        const request = await DataStore.create(selectedEntity);
+
+        if (request.status !== 200) {
+            showNotification(request.message, 'failure')
+            return
+        }
+        showNotification(request.message, 'success')
+    }
+
+
+    async function updateBook(): Promise<void> {
+
+        if (!selectedEntity || !selectedEntity.name || !selectedEntity.id) return;
+
+        const request = await DataStore.update(selectedEntity);
+
+        if (request.status !== 200) {
+            showNotification(request.message, 'failure')
+            return
+        }
+        showNotification(request.message, 'success')
+    }
+
+    async function deleteBook(): Promise<void> {
+
+        if (!selectedEntity || !selectedEntity.id) return;
+
+        const request = await DataStore.delete(selectedEntity.id);
+
+        if (request.status !== 200) {
+            showNotification(request.message, 'failure')
+            return
+        }
+        showNotification(request.message, 'success')
+    }
+
+
+
+    async function handleSubmit() {
+        if (modalPage === 'create') await createBook()
+        if (modalPage === 'edit') await updateBook()
+        if (modalPage === 'delete') await deleteBook()
+
+        getBookData();
+        setFormModal(false);
+        SetSelectedEntity(generateEmptyBook());
+    }
 
     const TableActions: TableActions<Entity>[] = [
         { key: 'update', header: "Update", action: (row) => { SetSelectedEntity(row); setModalPage('edit'); setFormModal(true) }, icon: AiFillEdit },
@@ -79,9 +130,10 @@ export const BookPage = () => {
                     closeModal={setFormModal}
                 >
                     <BookForm
-                        initialEntity={selectedEntity}
+                        entity={selectedEntity}
+                        setEntity={SetSelectedEntity}
                         flow={modalPage}
-                        onSubmit={() => console.log(modalPage)}
+                        onSubmit={handleSubmit}
 
                     />
                 </ModalFrame>
