@@ -17,6 +17,7 @@ import { generateEmptyBook } from "./book.functions";
 type Entity = BookEntity;
 const TableColumns = BookColumns;
 const generateEmpty = generateEmptyBook;
+
 export const BookPage = () => {
     /**Hooks**/
     const { showNotification } = useNotification()
@@ -33,7 +34,6 @@ export const BookPage = () => {
     const [modalPage, setModalPage] = useState<ModalFlow>('edit');
 
 
-    
     /**GET FUNCIOTIONS */
     async function getBookData(): Promise<void> {
 
@@ -91,7 +91,7 @@ export const BookPage = () => {
         showNotification(request.message, 'success')
     }
 
-
+    console.log(selectedEntity);
 
     async function handleSubmit() {
         if (modalPage === 'create') await createBook()

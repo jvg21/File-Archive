@@ -1,8 +1,9 @@
 import { Config } from "../../Config/config";
+import type { BookEntity } from "../Types/Entity/book.entity";
 import { RequestReturn } from "../Types/requestReturn";
 
 
-type Entity = BookDataStore;
+type Entity = BookEntity;
 
 export class BookDataStore {
 
@@ -69,7 +70,7 @@ export class BookDataStore {
         return response;
     }
 
-    async create(entity:Entity): Promise<RequestReturn> {
+    async create(entity:BookEntity): Promise<RequestReturn> {
         const response = new RequestReturn();
 
         try {

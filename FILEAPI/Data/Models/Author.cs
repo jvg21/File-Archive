@@ -7,6 +7,7 @@
         public ICollection<Book> Books { get; set; } = new List<Book>();
         public ICollection<FileArchive>? Files { get; set; } = new List<FileArchive>();
         public ICollection<Url> URLS { get; set; } = new List<Url>();
+        public bool IsActive { get; set; } = true;
     }
 
 
@@ -17,6 +18,7 @@
         public ICollection<BookGetSummaryDTO> Books { get; set; } = new List<BookGetSummaryDTO>();
         public ICollection<UrlGetDTO> URLS { get; set; } = new List<UrlGetDTO>();
         public ICollection<FileArchive>? Files { get; set; } = new List<FileArchive>();
+        public bool? IsActive { get; set; } 
     }
 
     public class AuthorGetSummaryDTO
@@ -37,5 +39,8 @@
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public ICollection<UrlUpsertDTO> URLS { get; set; } = new List<UrlUpsertDTO>();
+        public bool? IsActive { get; set; }
+
     }
 }

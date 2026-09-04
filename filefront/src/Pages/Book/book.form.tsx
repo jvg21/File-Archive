@@ -3,10 +3,11 @@ import type { BookEntity } from '../../Data/Types/Entity/book.entity'
 import { getAllReadingStatus } from "../../Data/Enums/readingStatus.enum";
 import { getAllWritingStatus } from "../../Data/Enums/writingStatus.enum";
 import style from '../../UI/Styles/modal.module.css'
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { UrlEntity } from "../../Data/Types/Entity/url.entity";
-import { numberInputRegex } from "../../Utils/Regex/number.regex";
-
+import type { AuthorEntity } from "../../Data/Types/Entity/author.entity";
+import { AuthorDataStore } from "../../Data/Datastore/author.datastore";
+import type { RequestReturn } from "../../Data/Types/requestReturn";
 
 interface BookFormProps {
 
@@ -17,13 +18,37 @@ interface BookFormProps {
 
 }
 
-
 export const BookForm = (props: BookFormProps) => {
 
     const { flow, onSubmit, entity, setEntity } = props;
 
-    // const [entity, setEntity] = useState<BookEntity>(initialEntity)
-    const [ulrField, setUrlField] = useState<UrlEntity>();
+    const authorDataStore = new AuthorDataStore();
+    const [authors, setAuthors] = useState<AuthorEntity[]>();
+
+    const [ulrField, setUrlField] = useState<Partial<UrlEntity> | null>();
+    const [authorField, setAuthorField] = useState<Partial<AuthorEntity> | null>();
+
+
+    /***/
+    async function getAuthorData(): Promise<void> {
+
+        const request: RequestReturn = await authorDataStore.getAll();
+
+        if (request.status !== 200) {
+            // showNotification(request.message, 'failure')
+            return
+        }
+        setAuthors(request.data as AuthorEntity[])
+    };
+
+
+    useEffect(() => {
+
+        getAuthorData();
+
+    }, [])
+
+    /*******Functions**** */
 
     function handdleAddUrl() {
         if (!ulrField?.name || !ulrField.content) return;
@@ -33,12 +58,26 @@ export const BookForm = (props: BookFormProps) => {
         setEntity((prev) => ({ ...prev, urls }));
     }
 
+    function handdleAddAuthor() {
+        if (!authorField) return;
+
+        const authors = entity.authors || [];
+
+        if (!authors.find((author) => author.id === authorField.id)?.id) {
+
+            authors.push({ id: authorField.id , name:authorField.name});
+            setEntity((prev) => ({ ...prev, authors }));
+            return;
+        }
+    }
+
+
     return (
         <>
             <h3>
                 Book
             </h3>
-            <form onSubmit={() => onSubmit()} className={style.modalForm}>
+            <form onSubmit={(e) => { e.preventDefault(); onSubmit() }} className={style.modalForm}>
 
                 {flow !== 'create' &&
                     <div className={style.field}>
@@ -79,14 +118,42 @@ export const BookForm = (props: BookFormProps) => {
                 </div>
 
                 {
-                    entity.urls.length > 0 &&
+                    entity.urls && entity.urls.length > 0 &&
                     entity.urls.map((url, index) =>
                         <div key={index}>
-
                             <p>{url.name} - {url.content}</p>
+                            <button onClick={() => setEntity((prev) => ({ ...prev, urls: entity.urls?.filter((_, i) => i !== index) }))}> X </button>
                         </div>
                     )
                 }
+
+                <div className={style.field}>
+                    <label>Authors: </label>
+
+                    <select value={authorField?.id ?? -1} onChange={
+                        (e) => { setAuthorField(authors?.find((author) => author.id === Number(e.target.value))) }
+                    }
+                    >
+                        <option value={-1} disabled>Authors ....</option>
+
+                        {authors && authors.map((author) =>
+                            <option key={author.id} value={author.id}>{author.name}</option>
+                        )}
+
+
+                    </select>
+                    <button type="button" onClick={() => { handdleAddAuthor(); setAuthorField(null) }}>Add Author</button>
+
+                    {
+                        entity.authors && entity.authors.length > 0 &&
+                        entity.authors.map((url, index) =>
+                            <div key={index}>
+                                <p>{url.name}</p>
+                                <button type="button" onClick={() => setEntity((prev) => ({ ...prev, authors: entity.authors?.filter((_, i) => i !== index) }))}> X </button>
+                            </div>
+                        )
+                    }
+                </div>
 
                 <div className={style.field}>
                     <label>Current Chapter: </label>
@@ -155,7 +222,7 @@ export const BookForm = (props: BookFormProps) => {
                     />
                 </div>
 
-                <button type="button" onClick={() => onSubmit()}>Submit</button>
+                <button type="submit">Submit</button>
 
             </form >
         </>

@@ -16,6 +16,8 @@ namespace FILEAPI.Data.Maps
             builder.Property(a => a.Name).HasMaxLength(60).IsRequired();
             builder.HasIndex(a => a.Name).IsUnique();
 
+            builder.Property(a => a.IsActive).HasDefaultValue(true);
+
 
             // N Author <--> N Book
 

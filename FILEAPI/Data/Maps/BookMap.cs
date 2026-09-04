@@ -15,6 +15,8 @@ namespace FILEAPI.Data.Maps
             builder.Property(b => b.Name).IsRequired();
             builder.HasIndex(b => b.Name).IsUnique();
 
+            builder.Property(a => a.IsActive).HasDefaultValue(true);
+
 
         }
     }

@@ -15,6 +15,8 @@ namespace FILEAPI.Data.Maps
             builder.Property(u => u.Content);
             builder.HasIndex(u => u.Content);
 
+            builder.Property(a => a.IsActive).HasDefaultValue(true);
+
 
             // 1 AUTHOR -> N URLS
 

@@ -27,9 +27,9 @@ namespace FILEAPI.Services
 
         public async Task<AuthorGetDTO> GetById(int id)
         {
-
             var request = await _authorRepository.GetById(id);
             if (request == null) throw new EntityNotFoundException();
+
             return request.Adapt<AuthorGetDTO>(); ;
         }
 
@@ -54,8 +54,8 @@ namespace FILEAPI.Services
             if (author == null) throw new EntityNotFoundException();
 
             //Update values
-            if(authorDto.Name != null) author.Name = authorDto.Name;
-         
+            if (authorDto.Name != null) author.Name = authorDto.Name;
+
             var request = await _authorRepository.Update(author);
             return request.Adapt<AuthorGetDTO>();
 

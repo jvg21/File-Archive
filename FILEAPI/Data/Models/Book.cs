@@ -18,6 +18,8 @@ namespace FILEAPI.Data.Models
         public ICollection<Author> Authors { get; set; } = new List<Author>();
         public ICollection<FileArchive>? Files { get; set; } = new List<FileArchive>();
         public ICollection<Url> URLS { get; set; } = new List<Url>();
+        public bool IsActive { get; set; } = true;
+
 
     }
     public class BookGetDTO
@@ -36,12 +38,14 @@ namespace FILEAPI.Data.Models
         public ICollection<AuthorGetSummaryDTO>? Authors { get; set; } = new List<AuthorGetSummaryDTO>();
         public ICollection<FileArchive>? Files { get; set; } = new List<FileArchive>();
         public ICollection<UrlGetDTO> URLS { get; set; } = new List<UrlGetDTO>();
+        public bool? IsActive { get; set; }
     }
 
     public class BookGetSummaryDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string? Summary { get; set; } = string.Empty;
     }
 
     public class BookInsertDTO
@@ -71,6 +75,9 @@ namespace FILEAPI.Data.Models
         public int? Words { get; set; }
         public ModelEnums.ReadingStatus? ReadingStatus { get; set; }
         public ModelEnums.WritingStatus? WritingStatus { get; set; }
+
+        public ICollection<UrlUpsertDTO> URLS { get; set; } = new List<UrlUpsertDTO>();
+        public bool? IsActive { get; set; }
     }
 
 }

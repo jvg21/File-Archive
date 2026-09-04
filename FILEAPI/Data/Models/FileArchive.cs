@@ -15,6 +15,7 @@ namespace FILEAPI.Data.Models
         public Book? Book { get; set; }
         public int? Author_Id { get; set; }
         public Author? Author { get; set; }
+        public bool IsActive { get; set; } = true;
 
     }
 
@@ -29,6 +30,7 @@ namespace FILEAPI.Data.Models
         public string Path { get; set; } = string.Empty;
         public int? Book_Id { get; set; }
         public int? Author_Id { get; set; }
+        public bool? IsActive { get; set; }
 
     }
 
@@ -56,6 +58,7 @@ namespace FILEAPI.Data.Models
         public string Path { get; set; } = string.Empty;
         public int? Book_Id { get; set; }
         public int? Author_Id { get; set; }
+        public bool? IsActive { get; set; }
 
     }
 }

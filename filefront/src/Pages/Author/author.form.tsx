@@ -19,7 +19,7 @@ export const AuthorForm = (props: AuthorFormProps) => {
 
     const { flow, onSubmit, entity, setEntity } = props;
 
-    const [ulrField, setUrlField] = useState<UrlEntity>();
+    const [ulrField, setUrlField] = useState<Partial<UrlEntity>>();
 
     function handdleAddUrl() {
         if (!ulrField?.name || !ulrField.content) return;
@@ -74,6 +74,7 @@ export const AuthorForm = (props: AuthorFormProps) => {
                         <div key={index}>
 
                             <p>{url.name} - {url.content}</p>
+                            <button onClick={() => setEntity((prev) => ({ ...prev, urls: entity.urls?.filter((_, i) => i !== index) }))}> X </button>
                         </div>
                     )
                 }

@@ -14,7 +14,7 @@ export interface BookEntity {
     words?: number;
     readingStatus?: number;
     writingStatus?: number;
-    authors: AuthorEntity[];
-    files: FileArchive[];
-    urls: UrlEntity[];
+    authors: Partial<AuthorEntity>[];
+    files: Partial<FileArchive>[];
+    urls?: Partial<UrlEntity>[];
 }
