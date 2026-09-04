@@ -1,9 +1,14 @@
 import { Config } from "../../Config/config";
+import type { AuthorEntity } from "../Types/Entity/author.entity";
 import { RequestReturn } from "../Types/requestReturn";
+
+
+type Entity = AuthorEntity;
 
 export class AuthorDataStore {
 
     private readonly URL = `${Config.apiHost}/author`
+
 
     async getAll(): Promise<RequestReturn> {
         const response = new RequestReturn();
@@ -19,7 +24,6 @@ export class AuthorDataStore {
 
             response.status = request.status;
             if (response.status !== 200) {
-
                 const data = await request.json()
                 response.message = data.message || "Error retrieving data";
                 return response;
@@ -52,7 +56,7 @@ export class AuthorDataStore {
             if (response.status !== 200) {
 
                 const data = await request.json()
-                response.message = data.message || "Error retrieving data";
+                response.message = data.message || "";
                 return response;
             };
 
@@ -66,4 +70,96 @@ export class AuthorDataStore {
         return response;
     }
 
+    async create(entity:Entity): Promise<RequestReturn> {
+        const response = new RequestReturn();
+
+        try {
+            const request = await fetch(`${this.URL}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify( entity )
+                // credentials: 'include'
+            })
+
+            response.status = request.status;
+            if (response.status !== 201) {
+
+                const data = await request.json()
+                response.message = data.message || "";
+                return response;
+            };
+
+            response.data = [...await request.json()];
+            response.message = "Created"
+
+        } catch (e) {
+
+            response.message = "Error Creating";
+        }
+        return response;
+    }
+
+
+    async update(entity:Entity): Promise<RequestReturn> {
+        const response = new RequestReturn();
+
+        try {
+            const request = await fetch(`${this.URL}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify( entity )
+                // credentials: 'include'
+            })
+
+            response.status = request.status;
+            if (response.status !== 201) {
+
+                const data = await request.json()
+                response.message = data.message || "";
+                return response;
+            };
+
+            response.data = [...await request.json()];
+            response.message = "Updated"
+
+        } catch (e) {
+
+            response.message = "Error Updating";
+        }
+        return response;
+    }
+
+    async delete(id: number): Promise<RequestReturn> {
+        const response = new RequestReturn();
+
+        try {
+            const request = await fetch(`${this.URL}/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // credentials: 'include'
+            })
+
+            response.status = request.status;
+            if (response.status !== 200) {
+
+                const data = await request.json()
+                response.message = data.message || "";
+                return response;
+            };
+
+            // response.data = [...await request.json()];
+            response.message = "Deleted"
+
+        } catch (e) {
+
+            response.message = "Error Deleting";
+        }
+        return response;
+    }
 }

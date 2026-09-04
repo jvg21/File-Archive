@@ -16,7 +16,7 @@ import { generateEmptyBook } from "./book.functions";
 
 type Entity = BookEntity;
 const TableColumns = BookColumns;
-
+const generateEmpty = generateEmptyBook;
 export const BookPage = () => {
     /**Hooks**/
     const { showNotification } = useNotification()
@@ -26,12 +26,14 @@ export const BookPage = () => {
 
     /*book table data*/
     const [tableData, setTableData] = useState<Entity[] | null>(null);
-    const [selectedEntity, SetSelectedEntity] = useState<Entity>(generateEmptyBook())
+    const [selectedEntity, SetSelectedEntity] = useState<Entity>(generateEmpty())
 
     /**PageStates */
     const [formModal, setFormModal] = useState<boolean>(false);
     const [modalPage, setModalPage] = useState<ModalFlow>('edit');
 
+
+    
     /**GET FUNCIOTIONS */
     async function getBookData(): Promise<void> {
 
@@ -98,7 +100,7 @@ export const BookPage = () => {
 
         getBookData();
         setFormModal(false);
-        SetSelectedEntity(generateEmptyBook());
+        SetSelectedEntity(generateEmpty());
     }
 
     const TableActions: TableActions<Entity>[] = [
@@ -119,7 +121,7 @@ export const BookPage = () => {
     return (
         <div className={pageStyle.main}>
 
-            <button type="button" className={pageStyle.button} onClick={() => { setModalPage('create'); SetSelectedEntity(generateEmptyBook()); setFormModal(true) }}>Add +</button>
+            <button type="button" className={pageStyle.button} onClick={() => { setModalPage('create'); SetSelectedEntity(generateEmpty()); setFormModal(true) }}>Add +</button>
 
             {/* /***LOAD THE TABLE COMPONENT* */}
             {TableMemo}
